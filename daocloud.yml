@@ -1,0 +1,11 @@
+image: daocloud/ci-python:2.7
+
+services:
+  - mysql
+
+script:
+  - pip install -r requirements.txt
+  - nosetests test.py --with-xunit --xunit-file=${TEST_RESULT}
+  - which python && coverage run --branch test.py
+  - which python && coverage xml -o ${TEST_COVERAGE} test.py
+
